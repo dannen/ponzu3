@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Ponzu lime & volatilty build script
-# Dannen Harris 2017 v. 2.0
+# Dannen Harris 2017 v. 3.0
 
 OSVER=el7
 ARCH=x86_64
