@@ -1,0 +1,350 @@
+root@hostname:~/ponzu3# docker build -t ponzu .
+Sending build context to Docker daemon  130.6kB
+Step 1/12 : FROM centos:centos7
+centos7: Pulling from library/centos
+74f0853ba93b: Pull complete 
+Digest: sha256:26f74cefad82967f97f3eeeef88c1b6262f9b42bc96f2ad61d6f3fdf544759b8
+Status: Downloaded newer image for centos:centos7
+ ---> 328edcd84f1b
+Step 2/12 : LABEL maintainer Dannen Harris version 3.0
+ ---> Running in 9ac6de51eb1d
+ ---> 2eae19f459d0
+Removing intermediate container 9ac6de51eb1d
+Step 3/12 : RUN mkdir /lime-module /rpms
+ ---> Running in 6571621ba76b
+ ---> 7d7ff150f329
+Removing intermediate container 6571621ba76b
+Step 4/12 : RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
+ ---> Running in 5a1e2a5fb6d8
+ ---> fa4c898e993f
+Removing intermediate container 5a1e2a5fb6d8
+Step 5/12 : RUN yum -y -q -e 0 install autoconf  automake  gcc  gcc-c++  make  patch  patchutils  dracut  dracut-kernel  elfutils  elfutils-devel  elfutils-libelf  elfutils-libelf-devel  git  kbd  kbd-misc  grubby  zip  zlip &&  yum -y clean all
+ ---> Running in 5b6484270005
+Package dracut-033-463.el7_3.2.x86_64 already installed and latest version
+Package dracut-033-463.el7_3.2.x86_64 already installed and latest version
+Package elfutils-libelf-0.166-2.el7.x86_64 already installed and latest version
+warning: /var/cache/yum/x86_64/7/base/packages/autoconf-2.69-11.el7.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Public key for autoconf-2.69-11.el7.noarch.rpm is not installed
+Public key for glibc-headers-2.17-157.el7_3.5.x86_64.rpm is not installed
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-3.1611.el7.centos.x86_64 (@CentOS)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+install-info: No such file or directory for /usr/share/info/autoconf.info
+install-info: No such file or directory for /usr/share/info/automake.info.gz
+Loaded plugins: fastestmirror, ovl
+Cleaning repos: base extras updates
+Cleaning up everything
+Cleaning up list of fastest mirrors
+ ---> 924ce2f5cc25
+Removing intermediate container 5b6484270005
+Step 6/12 : WORKDIR /
+ ---> 13912646987c
+Removing intermediate container e481e99e8e0b
+Step 7/12 : RUN git clone git://git.code.sf.net/p/libdwarf/code &&  cd /code &&  ./configure &&  make > /tmp/log-file 2>&1  &&  cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump &&  cd / &&  rm -rf /code
+ ---> Running in 62a35051173c
+Cloning into 'code'...
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking whether gcc needs -traditional... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for ranlib... ranlib
+checking for ar... ar
+checking build -fsanitize-address... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+=== configuring in libdwarf (/code/libdwarf)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking whether gcc needs -traditional... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for ranlib... ranlib
+checking for ar... ar
+checking alloca.h usability... yes
+checking alloca.h presence... yes
+checking for alloca.h... yes
+checking elf.h usability... yes
+checking elf.h presence... yes
+checking for elf.h... yes
+checking for unistd.h... (cached) yes
+checking elfaccess.h usability... no
+checking elfaccess.h presence... no
+checking for elfaccess.h... no
+checking libelf.h usability... yes
+checking libelf.h presence... yes
+checking for libelf.h... yes
+checking libelf/libelf.h usability... no
+checking libelf/libelf.h presence... no
+checking for libelf/libelf.h... no
+checking for sys/types.h... (cached) yes
+checking sys/elf_386.h usability... no
+checking sys/elf_386.h presence... no
+checking for sys/elf_386.h... no
+checking sys/elf_amd64.h usability... no
+checking sys/elf_amd64.h presence... no
+checking for sys/elf_amd64.h... no
+checking sys/elf_SPARC.h usability... no
+checking sys/elf_SPARC.h presence... no
+checking for sys/elf_SPARC.h... no
+checking sys/ia64/elf.h usability... no
+checking sys/ia64/elf.h presence... no
+checking for sys/ia64/elf.h... no
+checking where is basic elf data... <elf.h>
+Assuming struct Elf for the default libdwarf.h
+checking for elf64_getehdr in -lelf... yes
+yes
+checking for elf64_getshdr in -lelf... yes
+yes
+checking is __uint32_t predefined in the compiler... no
+checking is __uint64_t predefined in the compiler... no
+checking is __uint32_t defined in sys/types.h... yes
+checking is __uint64_t defined in sys/types.h... yes
+checking compiler supports __attribute__ unused ... yes
+checking zlib.h usability... yes
+libelf/libelf.h does not have struct _Elf
+libelf.h does not have struct _Elf
+checking Intel Itanium relocation types defined... no
+checking libelf defines struct _Elf... no
+checking compile with libelf.h works ... yes
+checking libelf.h exists and has Elf function declarations... yes
+checking libelf/libelf.h exists and has Elf function declarations... no
+checking libelf defines off64_t if _GNU_SOURCE defined... yes
+checking sgidefs.h present and defines __uint32_t... no
+checking sgidefs.h present and defines __uint64_t... no
+checking is Elf64_Rela defined in elf.h... yes
+checking is Elf64_Sym defined in elf.h... yes
+checking build shared... no
+checking build nonshared... yes
+checking build -fPIC... yes
+checking build -Wall... no
+checking build -fsanitize-address... no
+checking enable nonstandardprintf... no
+checking enable  windowspath... no
+checking enable old frame columns... no
+checking have windows stdafx.h... no
+checking producer generates SGI IRIX output... no
+checking producer generates only 32bit... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+=== configuring in dwarfdump (/code/dwarfdump)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking whether gcc needs -traditional... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for ranlib... ranlib
+checking for ar... ar
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking elf.h usability... yes
+checking elf.h presence... yes
+checking for elf.h... yes
+checking for unistd.h... (cached) yes
+checking libelf.h usability... yes
+checking libelf.h presence... yes
+checking for libelf.h... yes
+checking libelf/libelf.h usability... no
+checking libelf/libelf.h presence... no
+checking for libelf/libelf.h... no
+checking sgidefs.h usability... no
+checking sgidefs.h presence... no
+checking for sgidefs.h... no
+checking for sys/types.h... (cached) yes
+checking where is basic elf data... <elf.h>
+checking for elf64_getehdr in -lelf... yes
+checking compile with -Wall... no
+checking build -fsanitize-address... no
+checking checking if __attribute__ unused compiles ok... yes
+checking checking zlib present ... yes
+checking is off64_t type supported... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+=== configuring in dwarfgen (/code/dwarfgen)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking whether gcc needs -traditional... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for ranlib... ranlib
+checking for ar... ar
+checking elf.h usability... yes
+checking elf.h presence... yes
+checking for elf.h... yes
+checking libelf.h usability... yes
+checking libelf.h presence... yes
+checking for libelf.h... yes
+checking sgidefs.h usability... no
+checking sgidefs.h presence... no
+checking for sgidefs.h... no
+checking for sys/types.h... (cached) yes
+checking build -fsanitize-address... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+=== configuring in dwarfexample (/code/dwarfexample)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking whether gcc needs -traditional... no
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for ranlib... ranlib
+checking for ar... ar
+checking elf.h usability... yes
+checking elf.h presence... yes
+checking for elf.h... yes
+checking libelf.h usability... yes
+checking libelf.h presence... yes
+checking for libelf.h... yes
+checking sgidefs.h usability... no
+checking sgidefs.h presence... no
+checking for sgidefs.h... no
+checking for sys/types.h... (cached) yes
+checking build -fsanitize-address... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.h
+ ---> 61946a1f7dae
+Removing intermediate container 62a35051173c
+Step 8/12 : RUN git clone https://github.com/504ensicsLabs/LiME.git
+ ---> Running in f40066bdeac4
+Cloning into 'LiME'...
+ ---> 07ce42c77225
+Removing intermediate container f40066bdeac4
+Step 9/12 : RUN git clone https://github.com/volatilityfoundation/volatility.git
+ ---> Running in a8bc90105d3c
+Cloning into 'volatility'...
+ ---> 9b7eca45d483
+Removing intermediate container a8bc90105d3c
+Step 10/12 : COPY centos-el7-vault.repo /etc/yum.repos.d
+ ---> 9240ab65934d
+Removing intermediate container cd49a96aabe6
+Step 11/12 : COPY build-volatility.el7.sh /build-volatility.sh
+ ---> 9690cf46f95d
+Removing intermediate container bbf22d22a2db
+Step 12/12 : ENTRYPOINT /build-volatility.sh
+ ---> Running in 794cfe96dc3b
+ ---> c5659708e1d7
+Removing intermediate container 794cfe96dc3b
+Successfully built c5659708e1d7
+Successfully tagged ponzu:latest
+
+root@hostname:~/ponzu3# docker run ponzu 3.10.0-514.26.2
+No local rpms found, pulling from vault...
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+No '/dev/log' or 'logger' included for syslog logging
+Building lime module...
+Building dwarf module...
+Building 3.10.0-514.26.2.el7.x86_64 volatility zip file...
