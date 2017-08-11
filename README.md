@@ -4,7 +4,7 @@
 
 Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, DwarfDump modules, and Volatilty profiles.
 
-The tool is currently configured to only build for RHEL variants. Presently el6 and el7 are supported.
+The tool is currently configured to only build for RHEL variants. Presently el5, el6 and el7 are supported.
 
 ### USAGE
 
