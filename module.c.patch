@@ -1,0 +1,21 @@
+--- module.c	2017-08-11 21:09:58.788756600 +0000
++++ module_new.c	2017-08-11 21:09:50.688753112 +0000
+@@ -195,7 +195,7 @@
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,25)
+ #define OUR_OWN_MOD_STRUCTS
+ #endif
+-
++/*
+ #if LINUX_VERSION_CODE == KERNEL_VERSION(2,6,18)
+ #define OUR_OWN_MOD_STRUCTS
+ #endif
+@@ -222,7 +222,7 @@
+ struct module_sections module_sect_attrs;
+ 
+ #endif
+-
++*/
+ struct module_kobject module_kobject;
+ 
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,2,0)
+

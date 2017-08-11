@@ -25,9 +25,24 @@ LABEL maintainer Dannen Harris version 2.0
 RUN mkdir /lime-module /rpms
 
 # x86_64 only
-RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
+#RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
+#RUN rm -f /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/libselinux.repo
+RUN rm -f /etc/yum.repos.d/*.repo
+#RUN sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/CentOS-Vault.repo && \
+#  yum  -y update
+COPY centos-el5-archive.repo /etc/yum.repos.d
+RUN yum -y -q -e 0 update
 
-RUN yum -y -v install autoconf automake gcc gcc-c++ patch patchutils && \
+RUN yum -y -v install \
+  autoconf \
+  automake \
+  gcc \
+  gcc-c++ \
+  glibc \
+  libstdc++ \ 
+  make \
+  patch \
+  patchutils && \
  yum -y clean all
 RUN yum -y -q -e 0 install \
   dracut \
@@ -40,22 +55,20 @@ RUN yum -y -q -e 0 install \
   kbd-misc \
   grubby \
   wget \
-  zip \
+  zip \ 
   zlip && \
   yum -y clean all
 RUN wget http://repository.it4i.cz/mirrors/repoforge/redhat/el5/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm && rpm -i rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm && yum -y install git
 WORKDIR /
 RUN git clone git://git.code.sf.net/p/libdwarf/code && \
- cd /code && \
- ./configure && \
- make dd  > /tmp/log-file 2>&1 && \
- cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
- rm -rf /code
+  cd /code && \
+  ./configure && \
+  make dd  > /tmp/log-file 2>&1 && \
+  cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+  rm -rf 
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
-COPY centos-el5-vault.repo /etc/yum.repos.d
-RUN yum -y -q -e 0 update
 COPY build-volatility.sh /
-
+COPY module.c.patch /
 ENTRYPOINT ["/build-volatility.sh"]

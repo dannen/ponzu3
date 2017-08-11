@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Ponzu lime & volatilty build script
-# Dannen Harris 2017 v. 3.0
+# Dannen Harris 2017 v. 2.0
 
 OSVER=el5
 ARCH=x86_64
@@ -61,6 +61,7 @@ cp -v /boot/System.map-${KVER} /lime-module/${KVER}/boot/
 
 # build dwarfdump module
 cd /volatility/tools/linux
+patch < /module.c.patch
 echo ""
 echo ""
 echo "Building dwarf module..."
