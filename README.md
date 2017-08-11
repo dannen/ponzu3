@@ -17,6 +17,7 @@ cp build-volatility.el6.sh build-volatility.sh
 docker build -t ponzu .
 docker run -v /YourPath/rpms/:/rpms/ ponzu 2.6.32-573.26.1
 ```
+  * if you prefer, you can do 'docker build -t ponzu:el7 .' to create specific os versions of the ponzu container.
 
 Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.  The output will be in a zip file in ./rpms on your host.
 
