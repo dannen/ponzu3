@@ -39,7 +39,7 @@ RUN yum -y -v install \
   gcc \
   gcc-c++ \
   glibc \
-  libstdc++ \ 
+  libstdc++ \
   make \
   patch \
   patchutils && \
@@ -55,7 +55,7 @@ RUN yum -y -q -e 0 install \
   kbd-misc \
   grubby \
   wget \
-  zip \ 
+  zip \
   zlip && \
   yum -y clean all
 RUN wget http://repository.it4i.cz/mirrors/repoforge/redhat/el5/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm && rpm -i rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm && yum -y install git
@@ -65,7 +65,7 @@ RUN git clone git://git.code.sf.net/p/libdwarf/code && \
   ./configure && \
   make dd  > /tmp/log-file 2>&1 && \
   cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
-  rm -rf 
+  rm -rf
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
