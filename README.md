@@ -4,13 +4,14 @@
 
 Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, DwarfDump modules, and Volatilty profiles.
 
-Presently CentOS el5, el6 and el7, current Debian, and Current Ubuntu releases are supported.
+Presently CentOS el[5,6,7], current Debian, and current Ubuntu releases are supported.
 It will probably work with RedHat and Fedora but that is currently untested.
 
 ### USAGE
 
+CentOS
 ```
-cd ponzu
+cd ponzu3
 mkdir rpms
 [pick your OS release and rename the files]
 cp Dockerfile.el6 Dockerfile
@@ -20,7 +21,20 @@ docker run -v /YourPath/rpms/:/rpms/ ponzu 2.6.32-573.26.1
 ```
   * if you prefer, you can do 'docker build -t ponzu:el7 .' to create specific os versions of the ponzu container.
 
-Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.  The output will be in a zip file in ./rpms on your host.
+Debian/Ubuntu
+```
+cd ponzu3
+mkdir debs
+[pick your OS release and rename the files]
+cp Dockerfile.debian Dockerfile
+[ or cp Dockerfile.ubuntu Dockerfile]
+docker build -t ponzu .
+docker run -v /YourPath/debs/:/debs/ ponzu 4.9.0-3
+```
+* if you prefer, you can do 'docker build -t ponzu:debian .' to create specific os versions of the ponzu container.
+
+
+Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.  The output will be in a zip file in ./debs or ./rpms on your host.
 
 #### build
 "docker build ..." will create the base container which contains compilers and builds DwarfDump.  You only need to do this once per release.
@@ -41,7 +55,7 @@ lime-module/lime-2.6.32-573.26.1.el6.x86_64.ko
 
 #### build-volatility.sh
 
-The build-volatility script runs inside the Ponzu container.  It installs the relevant kernel rpms (local or remote), builds the lime module, builds the DwarfDump module, and concatenates the results into a standardized LiME profile formatted zip file.
+The build-volatility script runs inside the Ponzu container.  It installs the relevant kernel debs/rpms (local or remote), builds the lime module, builds the DwarfDump module, and concatenates the results into a standardized LiME profile formatted zip file.
 
 
 
