@@ -1,0 +1,44 @@
+# PONZU
+# build lime kernel module and volatilty profiles from lime and dwarfDump source.
+# change the FROM line to a different OS release if required.
+#
+# [build ponzu]
+# docker build -t ponzu:debian .
+#
+# [run ponzu]
+# docker run --rm -v /YourPath/debs/:/debs/ ponzu:debian 4.9.0-3
+#
+# I keep the deb out of the ponzu directory to keep the build process compact
+# [optional]
+# mkdir /YourPath/debs
+# cp linux-image-${KVER}*.deb /YourPath/debs
+# cp linux-headers-${KVER}*.deb /YourPath/debs
+
+FROM debian
+
+LABEL maintainer Dannen Harris version 2.0
+
+RUN mkdir /lime-module /debs
+
+# x86_64 only
+RUN apt update && \
+  apt install -y \
+  build-essential \
+  git \
+  libelf-dev \
+  zip && \
+  apt clean all
+WORKDIR /
+RUN git clone git://git.code.sf.net/p/libdwarf/code && \
+ cd /code && \
+ ./configure && \
+ make > /tmp/log-file && \
+ cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+ cd / && \
+ rm -rf /code
+RUN git clone https://github.com/504ensicsLabs/LiME.git
+RUN git clone https://github.com/volatilityfoundation/volatility.git
+
+COPY build-volatility.deb.sh /build-volatility.sh
+
+ENTRYPOINT ["/build-volatility.sh"]
