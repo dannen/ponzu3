@@ -16,7 +16,7 @@
 
 FROM debian
 
-LABEL maintainer Dannen Harris version 2.0
+LABEL maintainer Dannen Harris version 3.0
 
 RUN mkdir /lime-module /debs
 
