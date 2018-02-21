@@ -40,16 +40,30 @@ gpgcheck=0
 skip_if_unavailable=1
 name=UPDATES for centos 7.2 - x86_64
 
-# [vault-centos-os-7.3-x86_64]
-# baseurl=http://vault.centos.org/7.3.1611/os/x86_64/
-# enabled=1
-# gpgcheck=0
-# skip_if_unavailable=1
-# name=OS for centos 7.3 - x86_64
+[vault-centos-os-7.3-x86_64]
+baseurl=http://vault.centos.org/7.3.1611/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 7.3 - x86_64
 
-# [vault-centos-updates-7.3-x86_64]
-# baseurl=http://vault.centos.org/7.3.1611/updates/x86_64/
+[vault-centos-updates-7.3-x86_64]
+baseurl=http://vault.centos.org/7.3.1611/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 7.3 - x86_64
+
+# [vault-centos-os-7.4-x86_64]
+# baseurl=http://vault.centos.org/7.4.1708/os/x86_64/
 # enabled=1
 # gpgcheck=0
 # skip_if_unavailable=1
-# name=UPDATES for centos 7.3 - x86_64
+# name=OS for centos 7.4 - x86_64
+
+# [vault-centos-updates-7.4-x86_64]
+# baseurl=http://vault.centos.org/7.4.1708/updates/x86_64/
+# enabled=1
+# gpgcheck=0
+# skip_if_unavailable=1
+# name=UPDATES for centos 7.4 - x86_64
