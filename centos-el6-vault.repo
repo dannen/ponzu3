@@ -61,12 +61,19 @@ gpgcheck=0
 skip_if_unavailable=1
 name=OS for centos 6.8 - x86_64
 
-# [vault-centos-os-6.9-x86_64]
-# baseurl=http://vault.centos.org/6.9/os/x86_64/
-# enabled=1
-# gpgcheck=0
-# skip_if_unavailable=1
-# name=OS for centos 6.9 - x86_64
+[vault-centos-os-6.9-x86_64]
+baseurl=http://vault.centos.org/6.9/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 6.9 - x86_64
+
+[vault-centos-os-6.10-x86_64]
+baseurl=http://vault.centos.org/6.10/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 6.10 - x86_64
 
 [vault-centos-updates-6.0-x86_64]
 baseurl=http://vault.centos.org/6.0/updates/x86_64/
@@ -131,9 +138,16 @@ gpgcheck=0
 skip_if_unavailable=1
 name=UPDATES for centos 6.8 - x86_64
 
-# [vault-centos-updates-6.9-x86_64]
-# baseurl=http://vault.centos.org/6.9/updates/x86_64/
-# enabled=1
-# gpgcheck=0
-# skip_if_unavailable=1
-# name=UPDATES for centos 6.9 - x86_64
+[vault-centos-updates-6.9-x86_64]
+baseurl=http://vault.centos.org/6.9/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 6.9 - x86_64
+
+[vault-centos-updates-6.10-x86_64]
+baseurl=http://vault.centos.org/6.10/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 6.10 - x86_64
