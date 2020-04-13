@@ -3,10 +3,7 @@
 # Ponzu lime & volatilty build script
 # Dannen Harris 2017 v. 3.0
 
-OSVER=el7
-ARCH=x86_64
-KVER1=$1.${OSVER}.noarch
-KVER=$1.${OSVER}.${ARCH}
+KVER=$1-generic
 export KVER
 
 # import KVER into bash environment
@@ -19,12 +16,12 @@ else
 fi
 
 # look for local copies of rpms and install from vault if missing
-if [ ! -f "/rpms/kernel-${KVER}.rpm" ]; then
-  echo "No local rpms found, pulling from vault..."
-  yum -y -q -e 0 install kernel-${KVER} kernel-devel-${KVER} kernel-firmware-${KVER1}.${OSVER}.noarch
+if [ ! -f "/debs/linux-image-${KVER}.deb" ]; then
+  echo "No local debs found, pulling from vault..."
+  apt install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" linux-image-${KVER} linux-headers-${KVER}
 else
-  echo "Local rpms found, installing..."
-  yum install -y -q -e 0 /rpms/kernel-${KVER}.rpm /rpms/kernel-devel-${KVER}.rpm /rpms/kernel-firmware-${KVER1}.rpm
+ echo "Local debs found, installing..."
+ apt install -y /debs/linux-image-${KVER}.deb /debs/linux-headers-${KVER}.deb
 fi
 
 # build basic volatility paths
@@ -48,7 +45,7 @@ cp module.dwarf /lime-module/${KVER}/volatility/tools/linux/
 cd /
 echo "Building ${KVER} volatility zip file..."
 for f in /lime-module/${KVER}/*; do
-  [ -e "$f" ] && rm -f /rpms/${KVER}_ponzu.zip && zip -9 -q -r /rpms/${KVER}_ponzu.zip /lime-module/${KVER}/
+  [ -e "$f" ] && rm -f /debs/${KVER}_ponzu.zip && zip -9 -q -r /debs/${KVER}_ponzu.zip /lime-module/${KVER}/
 done
 
 # future: parse all files in /YourPath/rpms at once

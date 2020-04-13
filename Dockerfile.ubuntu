@@ -3,10 +3,10 @@
 # change the FROM line to a different OS release if required.
 #
 # [build ponzu]
-# docker build -t ponzu:ubuntu .
+# docker build -t ponzu:debian .
 #
 # [run ponzu]
-# docker run --rm -v /YourPath/debs/:/debs/ ponzu:ubuntu 4.4.0-91
+# docker run --rm -v /YourPath/debs/:/debs/ ponzu:debian 4.9.0-3
 #
 # I keep the deb out of the ponzu directory to keep the build process compact
 # [optional]
@@ -31,6 +31,7 @@ RUN apt update && \
 WORKDIR /
 RUN git clone git://git.code.sf.net/p/libdwarf/code && \
  cd /code && \
+ /bin/bash scripts/FIX-CONFIGURE-TIMES && \
  ./configure && \
  make > /tmp/log-file && \
  cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
@@ -39,6 +40,7 @@ RUN git clone git://git.code.sf.net/p/libdwarf/code && \
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
+COPY default.ubuntu.grub /etc/default/grub
 COPY build-volatility.deb.sh /build-volatility.sh
 
 ENTRYPOINT ["/build-volatility.sh"]
