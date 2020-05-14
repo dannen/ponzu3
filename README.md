@@ -72,3 +72,14 @@ see https://github.com/dannen/ponzu3/blob/master/sample_run.txt.
 #### build_vol_profile.sh script
 
 If you want to skip the entire docker run and just build everything on a command line, I've added the script "build_vol_profile.sh".
+
+#### faster LiME dumps
+
+Try this for a significantly faster LiME memory dump.
+
+```
+(install pigz)
+mkfifo ./zap; pigz -1 -c < zap > ram.lime.gz &&
+sudo /sbin/insmod lime-module.ko path=./zap format=lime
+rm -f zap
+```
