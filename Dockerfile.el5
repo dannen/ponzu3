@@ -62,6 +62,7 @@ RUN wget http://repository.it4i.cz/mirrors/repoforge/redhat/el5/en/x86_64/rpmfor
 WORKDIR /
 RUN git clone git://git.code.sf.net/p/libdwarf/code && \
   cd /code && \
+  /bin/bash scripts/FIX-CONFIGURE-TIMES && \
   ./configure && \
   make dd  > /tmp/log-file 2>&1 && \
   cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \

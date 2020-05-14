@@ -67,3 +67,8 @@ The build-volatility script runs inside the Ponzu container.  It installs the re
 #### Sample run
 
 see https://github.com/dannen/ponzu3/blob/master/sample_run.txt.
+
+
+#### build_vol_profile.sh script
+
+If you want to skip the entire docker run and just build everything on a command line, I've added the script "build_vol_profile.sh".

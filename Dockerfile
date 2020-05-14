@@ -49,6 +49,7 @@ RUN yum -y -q -e 0 install autoconf \
 WORKDIR /
 RUN git clone git://git.code.sf.net/p/libdwarf/code && \
  cd /code && \
+ /bin/bash scripts/FIX-CONFIGURE-TIMES && \
  ./configure && \
  make > /tmp/log-file 2>&1  && \
  cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
