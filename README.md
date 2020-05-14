@@ -79,7 +79,7 @@ Try this for a significantly faster LiME memory dump.
 
 ```
 (install pigz)
-mkfifo ./zap; pigz -1 -c < zap > ram.lime.gz &&
+mkfifo ./zap; pigz -1 -c < zap > ram.lime.gz &
 sudo /sbin/insmod lime-module.ko path=./zap format=lime
 rm -f zap
 ```
