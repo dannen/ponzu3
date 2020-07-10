@@ -83,3 +83,7 @@ mkfifo ./zap; pigz -1 -c < zap > ram.lime.gz &
 sudo /sbin/insmod lime-module.ko path=./zap format=lime
 rm -f zap
 ```
+
+#### manual_script_os.sh
+
+Added two manual build scripts [RHEL/Debian] for testing.
