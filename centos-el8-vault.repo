@@ -1,0 +1,27 @@
+[vault-centos-os-8.0-x86_64]
+baseurl=http://vault.centos.org/8.0.1905/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.0 - x86_64
+
+[vault-centos-os-8.1-x86_64]
+baseurl=http://vault.centos.org/8.1.1911/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.1 - x86_64
+
+[vault-centos-os-8.2-x86_64]
+baseurl=http://vault.centos.org/8.2.2004/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.2 - x86_64
+
+[vault-centos-os-8.3-x86_64]
+baseurl=https://vault.centos.org/8.3.2011/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.3 - x86_64
