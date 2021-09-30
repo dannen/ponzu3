@@ -95,3 +95,45 @@ enabled=1
 gpgcheck=0
 skip_if_unavailable=1
 name=UPDATES for centos 7.6 - x86_64
+
+[vault-centos-os-7.7-x86_64]
+baseurl=http://vault.centos.org/7.7.1908/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 7.7 - x86_64
+
+[vault-centos-updates-7.7-x86_64]
+baseurl=http://vault.centos.org/7.7.1908/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 7.7 - x86_64
+
+[vault-centos-os-7.8-x86_64]
+baseurl=http://vault.centos.org/7.8.2003/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 7.8 - x86_64
+
+[vault-centos-updates-7.8-x86_64]
+baseurl=http://vault.centos.org/7.8.2003/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 7.8 - x86_64
+
+[vault-centos-os-7.9-x86_64]
+baseurl=http://vault.centos.org/7.9.2009/os/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 7.9 - x86_64
+
+[vault-centos-updates-7.9-x86_64]
+baseurl=http://vault.centos.org/7.9.2009/updates/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=UPDATES for centos 7.9 - x86_64
