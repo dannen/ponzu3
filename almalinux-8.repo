@@ -1,0 +1,20 @@
+[almalinux-os-8-x86_64]
+baseurl=https://repo.almalinux.org/almalinux/8/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for almalinux 8 - x86_64
+
+[almalinux-os-8.3-x86_64]
+baseurl=https://repo.almalinux.org/almalinux/8.3/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for almalinux 8.3 - x86_64
+
+[almalinux-os-8.4-x86_64]
+baseurl=https://repo.almalinux.org/almalinux/8.4/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for almalinux 8.4 - x86_64
