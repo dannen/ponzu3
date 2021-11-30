@@ -17,6 +17,8 @@
 # cp kernel-firmware-${KVER}*.rpm /YourPath/rpms
 #
 # If you're doing el5 or el7, change the release value below and change the OSVER in build-volatility.sh
+#
+# 2021 added workaround for centos el7 issues with autoconf 1.14 which is the current release.
 
 FROM centos:centos7
 
@@ -28,6 +30,7 @@ RUN mkdir /lime-module /rpms
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 RUN yum -y -q -e 0 install autoconf \
  automake \
+ autotools \
  gcc \
  gcc-c++ \
  make \
@@ -42,6 +45,7 @@ RUN yum -y -q -e 0 install autoconf \
  git \
  kbd \
  kbd-misc \
+ libtool \
  grubby \
  zip \
  zlip && \
@@ -49,10 +53,14 @@ RUN yum -y -q -e 0 install autoconf \
 WORKDIR /
 RUN git clone git://git.code.sf.net/p/libdwarf/code && \
  cd /code && \
- /bin/bash scripts/FIX-CONFIGURE-TIMES && \
+ /bin/bash autogen.sh && \
  ./configure && \
- make > /tmp/log-file 2>&1  && \
- cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+ cd src/lib/libdwarf && \
+ make && \
+ cd - && \
+ cd src/bin/dwarfdump && \
+ make && \
+ cp -p /code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
  cd / && \
  rm -rf /code
 RUN git clone https://github.com/504ensicsLabs/LiME.git
