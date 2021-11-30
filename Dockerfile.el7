@@ -30,7 +30,6 @@ RUN mkdir /lime-module /rpms
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 RUN yum -y -q -e 0 install autoconf \
  automake \
- autotools \
  gcc \
  gcc-c++ \
  make \
