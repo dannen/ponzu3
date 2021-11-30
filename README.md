@@ -4,7 +4,7 @@
 
 Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, DwarfDump modules, and Volatilty profiles.
 
-Presently RHEL/CentOS el[5,6,7], current Debian, and Ubuntu [14,18] releases are supported.
+Presently RHEL/CentOS el[5,6,7,8], current Debian, and Ubuntu [14,18,20] releases are supported.
 It will probably work with RedHat and Fedora but that is currently untested.
 
 
@@ -19,10 +19,10 @@ CentOS
 cd ponzu3
 mkdir rpms
 [pick your OS release and rename the files]
-cp Dockerfile.el6 Dockerfile
-cp build-volatility.el6.sh build-volatility.sh
+cp Dockerfile.el7 Dockerfile
+cp build-volatility.el7.sh build-volatility.sh
 docker build -t ponzu .
-docker run -v /YourPath/rpms/:/rpms/ ponzu 2.6.32-573.26.1
+docker run -v /YourPath/rpms/:/rpms/ ponzu 3.10.0-957.38.3
 ```
   * if you prefer, you can do 'docker build -t ponzu:el7 .' to create specific os versions of the ponzu container.
 
@@ -54,8 +54,8 @@ The Volatilty profile zip will contain the following files:
 
 ```
 lime-module/module.dwarf
-lime-module/System.map-2.6.32-573.26.1.el6.x86_64
-lime-module/lime-2.6.32-573.26.1.el6.x86_64.ko
+lime-module/System.map-3.10.0-957.38.3.el7.x86_64
+lime-module/lime-3.10.0-957.38.3.el7.x86_64.ko
 ```
 
 #### build-volatility.sh
