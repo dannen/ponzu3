@@ -50,18 +50,14 @@ RUN yum -y -q -e 0 install autoconf \
  zlip && \
  yum -y clean all
 WORKDIR /
-RUN git clone git://git.code.sf.net/p/libdwarf/code && \
- cd /code && \
- /bin/bash autogen.sh && \
- ./configure && \
- cd src/lib/libdwarf && \
- make && \
- cd - && \
- cd src/bin/dwarfdump && \
- make && \
- cp -p /code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
- cd / && \
- rm -rf /code
+RUN git clone https://github.com/davea42/libdwarf-code.git && \
+cd /libdwarf-code && \
+/bin/bash autogen.sh && \
+./configure --disable-dependency-tracking && \
+make && \
+cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
+cd /
+
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
