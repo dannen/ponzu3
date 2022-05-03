@@ -25,3 +25,17 @@ enabled=1
 gpgcheck=0
 skip_if_unavailable=1
 name=OS for centos 8.3 - x86_64
+
+[vault-centos-os-8.4-x86_64]
+baseurl=https://vault.centos.org/8.4.2105/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.4 - x86_64
+
+[vault-centos-os-8.5-x86_64]
+baseurl=https://vault.centos.org/8.5.2111/BaseOS/x86_64/os/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for centos 8.5 - x86_64

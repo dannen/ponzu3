@@ -26,8 +26,11 @@ RUN mkdir /lime-module /rpms
 
 # x86_64 only
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
-RUN yum -y -q -e 0 install autoconf \
+RUN dnf --assumeyes --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos && \
+ dnf --assumeyes distro-sync
+RUN dnf --assumeyes -q -e 0 install autoconf \
  automake \
+ cmake \
  gcc \
  gcc-c++ \
  make \
@@ -44,15 +47,16 @@ RUN yum -y -q -e 0 install autoconf \
  kbd-misc \
  grubby \
  zip \
- zlip && \
+ zlib && \
  yum -y clean all
 WORKDIR /
-RUN git clone git://git.code.sf.net/p/libdwarf/code && \
- cd /code && \
- /bin/bash scripts/FIX-CONFIGURE-TIMES && \
- ./configure && \
- make > /tmp/log-file 2>&1  && \
- cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+RUN git clone https://github.com/davea42/libdwarf-code.git && \
+ mkdir /build && \
+ cd /build && \
+ cmake ../libdwarf-code && \
+ make && \
+ cd - && \
+ cp -p /build/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
  cd / && \
  rm -rf /code
 RUN git clone https://github.com/504ensicsLabs/LiME.git
