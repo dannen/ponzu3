@@ -56,7 +56,6 @@ WORKDIR /
 # https://www.prevanders.net/libdwarf-20200114.tar.gz
 # 20201201 release+ does not built properly on el6
 RUN curl https://www.prevanders.net/libdwarf-20200114.tar.gz --output libdwarf-20200114.tar.gz
-COPY libdwarf-20200114.tar.gz .
 RUN tar -xvzf libdwarf-20200114.tar.gz && \
  cd libdwarf-20200114/ && \
  ./configure && \
