@@ -4,10 +4,10 @@
 # also change the COPY centos-el6-vault.repo line as necessary
 #
 # [build ponzu]
-# docker build -t ponzu .
+# docker build -t ponzu:el7 .
 #
 # [run ponzu]
-# docker run --rm -v /YourPath/rpms/:/rpms/ ponzu 2.6.32-220.2.1
+# docker run --rm -v /YourPath/rpms/:/rpms/ ponzu:el7 3.10.0-123.1.2
 #
 # I keep the rpms out of the ponzu directory to keep the build process compact
 # [optional]
@@ -17,6 +17,8 @@
 # cp kernel-firmware-${KVER}*.rpm /YourPath/rpms
 #
 # If you're doing el5 or el7, change the release value below and change the OSVER in build-volatility.sh
+#
+# 2021 added workaround for centos el7 issues with autoconf 1.14 which is the current release.
 
 FROM centos:centos6
 
@@ -25,6 +27,8 @@ LABEL maintainer Dannen Harris version 3.0
 RUN mkdir /lime-module /rpms
 
 # x86_64 only
+RUN rm -f /etc/yum.repos.d/*repo
+COPY centos-el6-vault.repo /etc/yum.repos.d
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 RUN yum -y -q -e 0 install autoconf \
  automake \
@@ -40,26 +44,31 @@ RUN yum -y -q -e 0 install autoconf \
  elfutils-libelf \
  elfutils-libelf-devel \
  git \
+ grubby \
  kbd \
  kbd-misc \
- grubby \
+ libtool \
  zip \
- zlip && \
+ zlib && \
  yum -y clean all
 WORKDIR /
-RUN git clone git://git.code.sf.net/p/libdwarf/code && \
- cd /code && \
- /bin/bash scripts/FIX-CONFIGURE-TIMES && \
+# pull remote legacy version of libdwarf centos6 EoL 11-30-2020
+# https://www.prevanders.net/libdwarf-20200114.tar.gz
+# 20201201 release+ does not built properly on el6
+RUN curl https://www.prevanders.net/libdwarf-20200114.tar.gz --output libdwarf-20200114.tar.gz
+COPY libdwarf-20200114.tar.gz .
+RUN tar -xvzf libdwarf-20200114.tar.gz && \
+ cd libdwarf-20200114/ && \
  ./configure && \
  make > /tmp/log-file 2>&1  && \
- cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+ cp -p /libdwarf-20200114/dwarfdump/dwarfdump /bin/dwarfdump && \
  cd / && \
- rm -rf /code
+ rm -rf /libdwarf-20200114
+
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
-COPY centos-el6-vault.repo /etc/yum.repos.d
-
+#RUN yum -y -q -e 0 update
 COPY build-volatility.el6.sh /build-volatility.sh
 
 ENTRYPOINT ["/build-volatility.sh"]
