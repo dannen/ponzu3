@@ -18,10 +18,11 @@ CentOS
 ```
 cd ponzu3
 mkdir rpms
-[pick your OS release and rename the files]
+# pick your OS release and rename the files, e.g. centos7 and kernel version 3.10.0-957.38.3
 cp Dockerfile.el7 Dockerfile
 cp build-volatility.el7.sh build-volatility.sh
 docker build -t ponzu .
+# make sure you use the full path to your rpm target, not ./rpms/:/rpms/
 docker run -v /YourPath/rpms/:/rpms/ ponzu 3.10.0-957.38.3
 ```
   * if you prefer, you can do 'docker build -t ponzu:el7 .' to create specific os versions of the ponzu container.
@@ -30,16 +31,19 @@ Debian/Ubuntu
 ```
 cd ponzu3
 mkdir debs
-[pick your OS release and rename the files]
+# pick your OS release and rename the files, e.g. ubuntu with kernel version 4.9.0-3
 cp Dockerfile.debian Dockerfile
-[ or cp Dockerfile.ubuntu Dockerfile]
 docker build -t ponzu .
+# make sure you use the full path to your deb target, not ./debs/:/debs/
 docker run -v /YourPath/debs/:/debs/ ponzu 4.9.0-3
 ```
-* if you prefer, you can do 'docker build -t ponzu:debian .' to create specific os versions of the ponzu container.
+  * if you prefer, you can do 'docker build -t ponzu:debian .' to create specific os versions of the ponzu container.
 
 
-Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.  The output will be in a zip file in ./debs or ./rpms on your host.
+Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.
+
+The output will be in a zip file in ./debs or ./rpms on your host.
+
 
 #### build
 "docker build ..." will create the base container which contains compilers and builds DwarfDump.  You only need to do this once per release.
@@ -83,6 +87,8 @@ mkfifo ./zap; pigz -1 -c < zap > ram.lime.gz &
 sudo /sbin/insmod lime-module.ko path=./zap format=lime
 rm -f zap
 ```
+
+You can use any name, I just chose "zap" in this example.
 
 #### manual_script_os.sh
 

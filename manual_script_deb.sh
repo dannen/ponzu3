@@ -72,8 +72,8 @@ sudo /sbin/rmmod lime
 # sudo /sbin/insmod ~/lime-module/${KVER}/lime-${KVER}.ko path=~/ram.lime format=lime
 
 # uncompress copy of ram file
-pigz -d -c ~/ram.test.gz > ram.lime
+# pigz -d -c ~/ram.test.gz > ram.lime
 
 # volatility test
 #/usr/bin/env python ~/src/volatility/vol.py -d --profile Linux${KVER}_ponzuarm64 --plugins=tools/linux -f ~/ram/lime linux_bash
-/usr/bin/env python ~/volatility/vol.py -d --profile "Linux`uname -r |sed 's/\./_/g'`_ponzuarm64" --plugins=tools/linux -f ~/ram.lime linux_bash
+# /usr/bin/env python ~/volatility/vol.py -d --profile "Linux`uname -r |sed 's/\./_/g'`_ponzuarm64" --plugins=tools/linux -f ~/ram.lime linux_bash
