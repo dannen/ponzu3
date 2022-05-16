@@ -25,6 +25,7 @@ LABEL maintainer Dannen Harris version 3.0
 RUN mkdir /lime-module /rpms
 
 # x86_64 only
+COPY centos-el7-vault.repo /etc/yum.repos.d
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 RUN yum -y -q -e 0 install autoconf \
  automake \
@@ -42,24 +43,24 @@ RUN yum -y -q -e 0 install autoconf \
  git \
  kbd \
  kbd-misc \
+ libtool \
  grubby \
  zip \
  zlip && \
  yum -y clean all
 WORKDIR /
-RUN git clone git://git.code.sf.net/p/libdwarf/code && \
- cd /code && \
- /bin/bash scripts/FIX-CONFIGURE-TIMES && \
- ./configure && \
- make > /tmp/log-file 2>&1  && \
- cp -p /code/dwarfdump/dwarfdump /bin/dwarfdump && \
+RUN git clone https://github.com/davea42/libdwarf-code.git && \
+ cd /libdwarf-code && \
+ /bin/bash autogen.sh && \
+ ./configure --disable-dependency-tracking && \
+ make > /tmp/log-file 2>&1 && \
+ cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
  cd / && \
- rm -rf /code
+ rm -rf /libdwarf-code
+
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 
-COPY centos-el7-vault.repo /etc/yum.repos.d
-#RUN yum -y -q -e 0 update
 COPY build-volatility.el7.sh /build-volatility.sh
 
 ENTRYPOINT ["/build-volatility.sh"]
