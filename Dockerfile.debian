@@ -23,7 +23,6 @@ RUN mkdir /lime-module /debs
 # x86_64 only
 RUN apt update && \
   apt install -y \
-  apt-utils \
   autoconf \
   build-essential \
   git \
