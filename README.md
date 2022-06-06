@@ -2,10 +2,15 @@
 
 ## Ponzu
 
-Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, DwarfDump modules, and Volatilty profiles.
+Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, Dwarfdump modules, and Volatilty profiles.
 
-Presently RHEL/CentOS el[5,6,7,8], current Debian, and Ubuntu [14,18,20] releases are supported.
+Presently RHEL/CentOS el[6,7,8], current Debian, and Ubuntu [18,20] releases are supported.
 It will probably work with RedHat and Fedora but that is currently untested.
+
+Support for el5 is now deprecated. Both curl and wget from that era are using unsupported tlsv1 which breaks downloading
+of the git code. Git also is only available from rpmforge as an rpm and there are issues with rpmforge.
+
+Support for Ubuntu 14 is now deprecated.  I've had to change the Dockerfile to include package not available to Ubuntu 14.
 
 
 ### Docker
@@ -18,26 +23,22 @@ CentOS
 ```
 cd ponzu3
 mkdir rpms
-# pick your OS release and rename the files, e.g. centos7 and kernel version 3.10.0-957.38.3
+# pick your OS release and kernel version, e.g. centos7 and kernel version 3.10.0-957.38.3
 cp Dockerfile.el7 Dockerfile
-cp build-volatility.el7.sh build-volatility.sh
-docker build -t ponzu .
+build -f ./Dockerfile.el7 -t ponzu:el7.1u .
 # make sure you use the full path to your rpm target, not ./rpms/:/rpms/
-docker run -v /YourPath/rpms/:/rpms/ ponzu 3.10.0-957.38.3
+docker run -v /YourPath/rpms/:/rpms/ ponzu.el7 3.10.0-957.38.3
 ```
-  * if you prefer, you can do 'docker build -t ponzu:el7 .' to create specific os versions of the ponzu container.
 
 Debian/Ubuntu
 ```
 cd ponzu3
 mkdir debs
-# pick your OS release and rename the files, e.g. ubuntu with kernel version 4.9.0-3
-cp Dockerfile.debian Dockerfile
-docker build -t ponzu .
+# pick your OS release and kernel version, e.g. ubuntu with kernel version 4.9.0-3
+docker build -f ./Dockerfile.debian -t ponzu:debian .
 # make sure you use the full path to your deb target, not ./debs/:/debs/
 docker run -v /YourPath/debs/:/debs/ ponzu 4.9.0-3
 ```
-  * if you prefer, you can do 'docker build -t ponzu:debian .' to create specific os versions of the ponzu container.
 
 
 Append the kernel of your choice to the end to build modules and profiles for a specific kernel version.
@@ -45,8 +46,19 @@ Append the kernel of your choice to the end to build modules and profiles for a 
 The output will be in a zip file in ./debs or ./rpms on your host.
 
 
+Further examples
+```
+docker build -f ./Dockerfile.el6 -t ponzu:el6 .
+docker build -f ./Dockerfile.el7 -t ponzu:el7 .
+docker build -f ./Dockerfile.el8 -t ponzu:el8 .
+docker build -f ./Dockerfile.debian -t ponzu:debian .
+
+docker run -v /YourPath/ponzu3/rpms:/rpms/ ponzu:el7 3.10.0-957.38.3
+docker run -v /YourPath/ponzu3/debs:/debs/ ponzu:debian 5.4.0-113
+```
+
 #### build
-"docker build ..." will create the base container which contains compilers and builds DwarfDump.  You only need to do this once per release.
+"docker build ..." will create the base container which contains compilers and builds Dwarfdump.  You only need to do this once per release.
 
 #### run
 "docker run ..." will take the container you built above and either run against the default kernel in the Centos container or you can append the desired kernel release and it will build a specific Volatilty profile zip file for that kernel.
@@ -64,7 +76,7 @@ lime-module/lime-3.10.0-957.38.3.el7.x86_64.ko
 
 #### build-volatility.sh
 
-The build-volatility script runs inside the Ponzu container.  It installs the relevant kernel debs/rpms (local or remote), builds the lime module, builds the DwarfDump module, and concatenates the results into a standardized LiME profile formatted zip file.
+The build-volatility script runs inside the Ponzu container.  It installs the relevant kernel debs/rpms (local or remote), builds the lime module, builds the Dwarfdump module, and concatenates the results into a standardized LiME profile formatted zip file.
 
 
 
