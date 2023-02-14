@@ -27,7 +27,7 @@ mkdir rpms
 cp Dockerfile.el7 Dockerfile
 docker build -f ./Dockerfile.el7 -t ponzu:el7 .
 # make sure you use the full path to your rpm target, not ./rpms/:/rpms/
-docker run -v /YourPath/rpms/:/rpms/ ponzu.el7 3.10.0-957.38.3
+docker run -v /YourPath/rpms/:/rpms/ ponzu:el7 3.10.0-957.38.3
 ```
 
 Debian/Ubuntu
@@ -37,7 +37,7 @@ mkdir debs
 # pick your OS release and kernel version, e.g. ubuntu with kernel version 4.9.0-3
 docker build -f ./Dockerfile.debian -t ponzu:debian .
 # make sure you use the full path to your deb target, not ./debs/:/debs/
-docker run -v /YourPath/debs/:/debs/ ponzu 4.9.0-3
+docker run -v /YourPath/debs/:/debs/ ponzu:debian 4.9.0-3
 ```
 
 
