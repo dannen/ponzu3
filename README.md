@@ -25,7 +25,7 @@ cd ponzu3
 mkdir rpms
 # pick your OS release and kernel version, e.g. centos7 and kernel version 3.10.0-957.38.3
 cp Dockerfile.el7 Dockerfile
-build -f ./Dockerfile.el7 -t ponzu:el7.1u .
+docker build -f ./Dockerfile.el7 -t ponzu:el7 .
 # make sure you use the full path to your rpm target, not ./rpms/:/rpms/
 docker run -v /YourPath/rpms/:/rpms/ ponzu.el7 3.10.0-957.38.3
 ```
