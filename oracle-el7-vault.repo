@@ -1,0 +1,49 @@
+[Latest oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for oracle linux 7.0 - x86_64
+
+[UEK Release 6 oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/UEKR6/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for oracle UEK R6 linux 7.0 - x86_64
+
+[UEK Release 5 oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/UEKR5/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for oracle UEK R5 linux 7.0 - x86_64
+
+[UEK Release 4 oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/UEKR4/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for oracle UEK R4 linux 7.0 - x86_64
+
+[Latest Archive oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/latest/archive/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=Archive for oracle linux 7.0 - x86_64
+
+[UEK Release 5 Archive oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/UEKR5/archive/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=Archive for oracle UEK R5 linux 7.0 - x86_64
+
+[UEK Release 4 Archive oracle linux 7 x86_64]
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL7/UEKR4/archive/x86_64/
+enabled=1
+gpgcheck=0
+skip_if_unavailable=1
+name=OS for oracle linux 7.0 - x86_64
+name=Archive for oracle UEK R4 linux 7.0 - x86_64

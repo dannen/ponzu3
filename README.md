@@ -4,7 +4,7 @@
 
 Ponzu is a set of Dockerfiles to create a container to build LiME kernel modules, Dwarfdump modules, and Volatilty profiles.
 
-Presently RHEL/CentOS el[6,7,8], current Debian, and Ubuntu [18,20] releases are supported.
+Presently RHEL/CentOS el[6,7,8], Oracle UEK [7], current Debian, and Ubuntu [18,20] releases are supported.
 It will probably work with RedHat and Fedora but that is currently untested.
 
 Support for el5 is now deprecated. Both curl and wget from that era are using unsupported tlsv1 which breaks downloading
@@ -19,16 +19,36 @@ A prebuilt el7 container is available at https://hub.docker.com/r/dannen/ponzu3/
 
 ### USAGE
 
+OracleOS
+```
+cd ponzu3
+mkdir rpms
+# pick your OS release and kernel version, e.g. centos7 and kernel version 4.14.35-2047.503.1
+docker build -f ./Dockerfile.oracle.el7 -t ponzu:oraclelinux7 .
+# make sure you use the full path to your rpm target, not ./rpms/:/rpms/
+docker run -v /YourPath/rpms/:/rpms/ ponzu:oraclelinux7 4.14.35-2047.503.1
+```
+
 CentOS
 ```
 cd ponzu3
 mkdir rpms
 # pick your OS release and kernel version, e.g. centos7 and kernel version 3.10.0-957.38.3
-cp Dockerfile.el7 Dockerfile
 docker build -f ./Dockerfile.el7 -t ponzu:el7 .
 # make sure you use the full path to your rpm target, not ./rpms/:/rpms/
 docker run -v /YourPath/rpms/:/rpms/ ponzu:el7 3.10.0-957.38.3
 ```
+
+Oracle
+```
+cd ponzu3
+mkdir rpms
+# pick your OS release and kernel version, e.g. Oracle7 and kernel version 4.14.35-2047.503.1
+docker build -f ./Dockerfile.Oracle7 -t ponzu:oracle7 .
+# make sure you use the full path to your rpm target, not ./rpms/:/rpms/
+docker run -v /YourPath/rpms/:/rpms/ ponzu:oracle7 4.14.35-2047.503.1
+```
+
 
 Debian/Ubuntu
 ```

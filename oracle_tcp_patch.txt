@@ -1,0 +1,19 @@
+--- tcp.c	2023-02-23 15:34:57.543543247 -0600
++++ oracle_LiME_tcp.c	2023-02-23 15:35:10.955713187 -0600
+@@ -48,6 +48,8 @@
+     struct sockaddr_in saddr;
+     int r;
+ 
++int opt = 1;
++
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,2,0)
+     r = sock_create_kern(&init_net, AF_INET, SOCK_STREAM, IPPROTO_TCP, &control);
+ #elif LINUX_VERSION_CODE > KERNEL_VERSION(2,6,5)
+@@ -72,7 +74,6 @@
+        }
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(5,8,0)
+-    int opt = 1;
+     r = kernel_setsockopt(control, SOL_SOCKET, SO_REUSEADDR, (char *)&opt, sizeof (opt));
+     if (r < 0) {
+         DBG("Error setting socket options");
