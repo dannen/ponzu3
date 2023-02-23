@@ -19,16 +19,6 @@ A prebuilt el7 container is available at https://hub.docker.com/r/dannen/ponzu3/
 
 ### USAGE
 
-OracleOS
-```
-cd ponzu3
-mkdir rpms
-# pick your OS release and kernel version, e.g. centos7 and kernel version 4.14.35-2047.503.1
-docker build -f ./Dockerfile.oracle.el7 -t ponzu:oraclelinux7 .
-# make sure you use the full path to your rpm target, not ./rpms/:/rpms/
-docker run -v /YourPath/rpms/:/rpms/ ponzu:oraclelinux7 4.14.35-2047.503.1
-```
-
 CentOS
 ```
 cd ponzu3
