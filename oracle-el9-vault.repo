@@ -1,0 +1,134 @@
+[ol9_MySQL80]
+name=MySQL 8.0 for Oracle Linux 9 ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/MySQL80/community/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_MySQL80_tools_community]
+name=MySQL 8.0 Tools Community for Oracle Linux 9 ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/MySQL80/tools/community/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_MySQL80_connectors_community]
+name=MySQL 8.0 Connectors Community for Oracle Linux 9 ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/MySQL80/connectors/community/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_developer_EPEL]
+name=Oracle Linux $releasever EPEL Packages for Development ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/developer/EPEL/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_developer]
+name=Oracle Linux 9 Development Packages ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/developer/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_developer_UEKR7]
+name=Developer Preview of UEK Release 7 ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/developer/UEKR7/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_developer_kvm_utils]
+name=Oracle Linux $releasever KVM Utilities for Development and test ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/developer/kvm/utils/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_oraclelinuxmanager210_client]
+name=Oracle Linux Manager Client 2.10 for Oracle Linux 9 ($basearch)
+baseurl=https://yum$ociregion.oracle.com/repo/OracleLinux/OL9/oraclelinuxmanager210/client/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_baseos_latest]
+name=Oracle Linux 9 BaseOS Latest ($basearch)  
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/baseos/latest/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_appstream]
+name=Oracle Linux 9 Application Stream Packages ($basearch) 
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/appstream/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_u0_baseos_base]
+name=Oracle Linux 9 BaseOS GA ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/0/baseos/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_u1_baseos_base]
+name=Oracle Linux 9.1 BaseOS ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/1/baseos/base/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_addons]
+name=Oracle Linux 9 Addons ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/addons/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_codeready_builder]
+name=Oracle Linux 9 CodeReady Builder ($basearch) - (Unsupported)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/codeready/builder/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_distro_builder]
+name=Oracle Linux 9 Distro Builder ($basearch) - (Unsupported)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/distro/builder/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_MODRHCK]
+name=Latest RHCK with fixes from Oracle for Oracle Linux $releasever ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/MODRHCK/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+priority=20
+enabled=0
+
+[ol9_UEKR7]
+name=Oracle Linux 9 UEK Release 7 ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/UEKR7/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=1
+
+[ol9_RDMA]
+name=Oracle Linux 9 ($basearch) RDMA
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/RDMA/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+enabled=0
+
+[ol9_kvm_utils]
+name=Oracle Linux 9 KVM Utilities ($basearch)
+baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL9/kvm/utils/$basearch/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
+gpgcheck=1
+priority=10
+enabled=0

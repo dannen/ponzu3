@@ -1,0 +1,72 @@
+# PONZU
+# build lime kernel module and volatilty profiles from lime and dwarfDump source.
+# change the FROM line to a different OS release if required
+# also change the COPY centos-el6-vault.repo line as necessary
+#
+# [build ponzu]
+# docker build -t ponzu:el7 .
+#
+# [run ponzu]
+# docker run --rm -v /YourPath/rpms/:/rpms/ ponzu:el7 3.10.0-123.1.2
+#
+# I keep the rpms out of the ponzu directory to keep the build process compact
+# [optional]
+# mkdir /YourPath/rpms
+# cp kernel-${KVER}*.rpm /YourPath/rpms
+# cp kernel-devel-${KVER}*.rpm /YourPath/rpms
+# cp kernel-firmware-${KVER}*.rpm /YourPath/rpms
+#
+# If you're doing el5 or el7, change the release value below and change the OSVER in build-volatility.sh
+
+FROM oraclelinux:8
+
+LABEL maintainer Dannen Harris version 3.0
+
+RUN mkdir /lime-module /rpms
+
+# x86_64 only
+COPY oracle-el8-vault.repo /etc/yum.repos.d
+RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
+RUN yum -y -q -e 0 install autoconf \
+ automake \
+ file \
+ gcc \
+ gcc-c++ \
+ make \
+ patch \
+ patchutils \
+ dracut \
+ dracut-kernel \
+ elfutils \
+ elfutils-devel \
+ elfutils-libelf \
+ elfutils-libelf-devel \
+ git \
+ grubby \
+ kbd \
+ kbd-misc \
+ libdtrace-ctf \
+ libtool \
+ linux-firmware \
+ numactl-libs \
+ zip \
+ zlip && \
+ yum -y clean all
+WORKDIR /
+RUN git clone https://github.com/davea42/libdwarf-code.git && \
+ cd /libdwarf-code && \
+ /bin/bash autogen.sh && \
+ ./configure --disable-dependency-tracking && \
+ make > /tmp/log-file 2>&1 && \
+ cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
+ cd / && \
+ rm -rf /libdwarf-code
+
+RUN git clone https://github.com/504ensicsLabs/LiME.git
+COPY oracle_tcp_patch.txt /LiME/src
+
+RUN git clone https://github.com/volatilityfoundation/volatility.git
+
+COPY build-volatility.oracle.el8.sh /build-volatility.sh
+
+ENTRYPOINT ["/build-volatility.sh"]
