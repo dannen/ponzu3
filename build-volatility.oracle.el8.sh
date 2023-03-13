@@ -4,7 +4,8 @@
 # Dannen Harris 2023 v. 3.0
 
 # +uek for Oracle Unbreakable Linux Kernel
-OSVER=el8uek
+# OSVER=el8uek
+OSVER=el8_7
 ARCH=x86_64
 KVER1=$1.${OSVER}.noarch
 KVER=$1.${OSVER}.${ARCH}
@@ -27,10 +28,12 @@ fi
 # look for local copies of rpms and install from vault if missing
 if [ ! -f "/rpms/kernel-${KVER}.rpm" ]; then
   echo "No local rpms found, pulling from vault..."
-  yum -y -q -e 0 install kernel-uek-${KVER} kernel-uek-devel-${KVER} kernel-firmware-${KVER1}.${OSVER}.noarch
+  # yum -y -q -e 0 install kernel-uek-${KVER} kernel-uek-devel-${KVER} kernel-firmware-${KVER1}.${OSVER}.noarch
+  yum -y -q -e 0 install kernel-${KVER} kernel-devel-${KVER}
 else
   echo "Local rpms found, installing..."
-  yum install -y -q -e 0 /rpms/kernel-uek-${KVER}.rpm /rpms/kernel-uek-devel-${KVER}.rpm /rpms/kernel-firmware-${KVER1}.rpm
+  # yum install -y -q -e 0 /rpms/kernel-uek-${KVER}.rpm /rpms/kernel-uek-devel-${KVER}.rpm /rpms/kernel-firmware-${KVER1}.rpm
+  yum install -y -q -e 0 /rpms/kernel-${KVER}.rpm /rpms/kernel-devel-${KVER}.rpm
 fi
 
 # build basic volatility paths
@@ -39,23 +42,23 @@ mkdir -p /lime-module/${KVER}/volatility/tools/linux/
 
 # build lime kernel module
 cd /LiME/src
-patch < oracle_tcp_patch.txt
+# patch < oracle_tcp_patch.txt
 echo "Building lime module..."
 make > /tmp/log-file 2>&1
 cp lime-${KVER}.ko /lime-module/${KVER}
-cp /boot/System.map-${KVER} /lime-module/${KVER}/boot
+cp -v /boot/System.map-${KVER} /lime-module/${KVER}/boot
 
 # build dwarfdump module
 cd /volatility/tools/linux
 echo "Building dwarf module..."
 make > /tmp/log-file 2>&1
-cp module.dwarf /lime-module/${KVER}/volatility/tools/linux/
+cp -v module.dwarf /lime-module/${KVER}/volatility/tools/linux/
 
 # zip up results into a volatility formatted file
 cd /
 echo "Building ${KVER} volatility zip file..."
 for f in /lime-module/${KVER}/*; do
-  [ -e "$f" ] && rm -f /rpms/${KVER}_ponzu.zip && zip -9 -q -r /rpms/${KVER}_ponzu.zip /lime-module/${KVER}/
+  [ -e "$f" ] && rm -f /rpms/${KVER}_ponzu.zip && zip -v -9 -q -r /rpms/${KVER}_ponzu.zip /lime-module/${KVER}/
 done
 
 # future: parse all files in /YourPath/rpms at once

@@ -45,12 +45,10 @@ RUN yum -y -q -e 0 install autoconf \
  grubby \
  kbd \
  kbd-misc \
- libdtrace-ctf \
  libtool \
  linux-firmware \
  numactl-libs \
- zip \
- zlip && \
+ zip &&\
  yum -y clean all
 WORKDIR /
 RUN git clone https://github.com/davea42/libdwarf-code.git && \
