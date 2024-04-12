@@ -28,8 +28,8 @@ RUN mkdir /lime-module /rpms
 COPY centos-el8-vault.repo /etc/yum.repos.d
 RUN echo "exclude=*.i386 *.i586 *.i686" >> /etc/yum.conf
 RUN dnf --assumeyes --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos \
- && dnf --assumeyes distro-sync
-RUN dnf --assumeyes -q -e 0 install autoconf \
+ && dnf --assumeyes distro-sync \
+ && dnf --assumeyes -q -e 0 install autoconf \
  automake \
  cmake \
  gcc \
