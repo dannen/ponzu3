@@ -46,17 +46,17 @@ RUN yum -y -q -e 0 install autoconf \
  libtool \
  grubby \
  zip \
- zlip && \
- yum -y clean all
+ zlip \
+ && yum -y clean all
 WORKDIR /
-RUN git clone https://github.com/davea42/libdwarf-code.git && \
- cd /libdwarf-code && \
- /bin/bash autogen.sh && \
- ./configure --disable-dependency-tracking && \
- make > /tmp/log-file 2>&1 && \
- cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
- cd / && \
- rm -rf /libdwarf-code
+RUN git clone https://github.com/davea42/libdwarf-code.git \
+ && cd /libdwarf-code \
+ && /bin/bash autogen.sh \
+ && ./configure --disable-dependency-tracking \
+ && make > /tmp/log-file 2>&1 \
+ && cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump \
+ && cd / \
+ && rm -rf /libdwarf-code
 
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git

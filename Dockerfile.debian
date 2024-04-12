@@ -21,8 +21,8 @@ LABEL maintainer Dannen Harris version 3.0
 RUN mkdir /lime-module /debs
 
 # x86_64 only
-RUN apt update && \
-  apt install -y \
+RUN apt update \
+  && apt install -y \
   autoconf \
   build-essential \
   git \
@@ -30,17 +30,17 @@ RUN apt update && \
   libtool \
   pkg-config \
   zip \
-  zlib1g && \
-  apt clean all
+  zlib1g \
+  && apt clean all
 WORKDIR /
-RUN git clone https://github.com/davea42/libdwarf-code.git && \
- cd /libdwarf-code && \
- /bin/bash autogen.sh && \
- ./configure --disable-dependency-tracking && \
- make > /tmp/log-file 2>&1 && \
- cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump && \
- cd / && \
- rm -rf /libdwarf-code
+RUN git clone https://github.com/davea42/libdwarf-code.git \
+ && cd /libdwarf-code \
+ && /bin/bash autogen.sh \
+ && ./configure --disable-dependency-tracking \
+ && make > /tmp/log-file 2>&1 \
+ && cp -p /libdwarf-code/src/bin/dwarfdump/dwarfdump /bin/dwarfdump \
+ && cd / \
+ && rm -rf /libdwarf-code
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
 

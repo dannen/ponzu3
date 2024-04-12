@@ -21,7 +21,8 @@ fi
 # look for local copies of rpms and install from vault if missing
 if [ ! -f "/rpms/kernel-${KVER}.rpm" ]; then
   echo "No local rpms found, pulling from vault..."
-  yum -y -q -e 0 install kernel-${KVER} kernel-devel-${KVER} kernel-firmware-${KVER1}.${OSVER}.noarch
+  #yum -y -q -e 0 install kernel-${KVER} kernel-devel-${KVER} kernel-firmware-${KVER1}.${OSVER}.noarch
+  yum -y -q -e 0 install kernel-${KVER} kernel-devel-${KVER}
 else
   echo "Local rpms found, installing..."
   yum install -y -q -e 0 /rpms/kernel-${KVER}.rpm /rpms/kernel-devel-${KVER}.rpm /rpms/kernel-firmware-${KVER1}.rpm

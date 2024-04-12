@@ -28,13 +28,13 @@ mkdir -p ~/lime-module/${KVER}/boot
 mkdir -p ~/lime-module/${KVER}/volatility/tools/linux/
 
 # build dwarfdump
-cd ~/code && \
-/bin/bash scripts/FIX-CONFIGURE-TIMES && \
-autoreconf -f -i && \
-./configure && \
-make > /tmp/log-file 2>&1  && \
-sudo cp -p ~/code/dwarfdump/dwarfdump /bin/dwarfdump && \
-cd ~
+cd ~/code \
+&& /bin/bash scripts/FIX-CONFIGURE-TIMES \
+&& autoreconf -f -i \
+&& ./configure \
+&& make > /tmp/log-file 2>&1 \
+&& sudo cp -p ~/code/dwarfdump/dwarfdump /bin/dwarfdump \
+&& cd ~
 
 # build lime kernel module
 cd ~/LiME/src

@@ -47,20 +47,20 @@ RUN yum -y -q -e 0 install autoconf \
  kbd-misc \
  libtool \
  zip \
- zlib && \
- yum -y clean all
+ zlib \
+ && yum -y clean all
 WORKDIR /
 # pull remote legacy version of libdwarf centos6 EoL 11-30-2020
 # https://www.prevanders.net/libdwarf-20200114.tar.gz
 # 20201201 release+ does not built properly on el6
 RUN curl https://www.prevanders.net/libdwarf-20200114.tar.gz --output libdwarf-20200114.tar.gz
-RUN tar -xvzf libdwarf-20200114.tar.gz && \
- cd libdwarf-20200114/ && \
- ./configure && \
- make > /tmp/log-file 2>&1  && \
- cp -p /libdwarf-20200114/dwarfdump/dwarfdump /bin/dwarfdump && \
- cd / && \
- rm -rf /libdwarf-20200114 /libdwarf-20200114.tar.gz
+RUN tar -xvzf libdwarf-20200114.tar.gz \
+ && cd libdwarf-20200114/ \
+ && ./configure \
+ && make > /tmp/log-file 2>&1  \
+ && cp -p /libdwarf-20200114/dwarfdump/dwarfdump /bin/dwarfdump \
+ && cd / \
+ && rm -rf /libdwarf-20200114 /libdwarf-20200114.tar.gz
 
 RUN git clone https://github.com/504ensicsLabs/LiME.git
 RUN git clone https://github.com/volatilityfoundation/volatility.git
